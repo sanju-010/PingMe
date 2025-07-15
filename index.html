@@ -31,12 +31,16 @@
       <p class="info-text">Your ID:</p>
       <p id="my-id" class="peer-id"></p>
       <canvas id="qrcode" class="qr-code"></canvas>
+        <button onclick="goBack()" class="btn clear">← Back</button>
+
     </div>
 
     <!-- Join Section -->
     <div id="join-section" class="hidden center-box">
       <input type="text" id="join-id" placeholder="Enter Peer ID to join" class="input" />
       <button class="btn connect" onclick="connectToPeer()">Connect</button>
+        <button onclick="goBack()" class="btn clear">← Back</button>
+
     </div>
 
     <!-- Chat Section -->
@@ -50,6 +54,7 @@
       </div>
     </div>
   </div>
+<button id="installBtn" style="display: none; position: fixed; bottom: 20px; right: 20px; padding: 10px 14px; background: #128c7e; color: white; border: none; border-radius: 20px;">📲 Install App</button>
 
 <!-- ✅ Include Emoji Button Library -->
 <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.min.js"></script>
@@ -62,6 +67,31 @@
 
     Notification.requestPermission();
   </script>
+  <script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('📦 beforeinstallprompt fired');
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById("installBtn").style.display = "block";
+  });
+
+  document.getElementById("installBtn").addEventListener("click", () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(choice => {
+        if (choice.outcome === 'accepted') {
+          console.log('✅ User accepted install');
+        } else {
+          console.log('❌ User dismissed install');
+        }
+        deferredPrompt = null;
+      });
+    }
+  });
+</script>
+
 </body>
 
 </html>

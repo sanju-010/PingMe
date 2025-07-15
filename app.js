@@ -157,3 +157,9 @@ window.onload = () => {
 };
 
 
+function goBack() {
+  document.getElementById("host-section").classList.add("hidden");
+  document.getElementById("join-section").classList.add("hidden");
+  document.getElementById("chat-section").classList.add("hidden");
+  document.getElementById("setup").classList.remove("hidden");
+}

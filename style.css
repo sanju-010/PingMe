@@ -313,6 +313,15 @@ body {
 }
 
 
+.btn.clear {
+  background: #ddd;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 
 /* Dark Mode */
