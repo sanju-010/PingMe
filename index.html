@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PingMe</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+<!-- Emoji Button library -->
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.min.js"></script>
+
+</head>
+
+<body class="chat-app">
+  <div class="chat-container">
+    <div class="top-bar">
+      <h2>PingMe!</h2>
+    </div>
+
+    <!-- Setup Section -->
+    <div id="setup" class="center-box">
+      <button class="btn host" onclick="hostChat()">➕ Host</button>
+      <button class="btn join" onclick="joinChat()">🔗 Join</button>
+    </div>
+
+    <!-- Host Section -->
+    <div id="host-section" class="hidden center-box">
+      <p class="info-text">Your ID:</p>
+      <p id="my-id" class="peer-id"></p>
+      <canvas id="qrcode" class="qr-code"></canvas>
+    </div>
+
+    <!-- Join Section -->
+    <div id="join-section" class="hidden center-box">
+      <input type="text" id="join-id" placeholder="Enter Peer ID to join" class="input" />
+      <button class="btn connect" onclick="connectToPeer()">Connect</button>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chat-section" class="hidden chat-box chat-section">
+      <div id="chat-box" class="messages"></div>
+      <div class="message-input">
+        <button id="emoji-btn" class="btn emoji">😊</button>
+        <input type="text" id="msg-input" placeholder="Type a message" class="input" />
+        <button onclick="sendMessage()" class="btn send">⮞</button>
+        <!-- <button onclick="clearChat()" class="btn clear">🗑</button> -->
+      </div>
+    </div>
+  </div>
+
+<!-- ✅ Include Emoji Button Library -->
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.min.js"></script>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+    Notification.requestPermission();
+  </script>
+</body>
+
+</html>
